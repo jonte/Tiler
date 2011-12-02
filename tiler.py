@@ -9,6 +9,7 @@ class Positions:
     NE  = 5
     NW  = 6
     SE  = 7
+    F   = 8
 
 class WMHelpers:
     xprop = "xprop"
@@ -43,9 +44,14 @@ class WMHelpers:
         cmdStr = "wmctrl -i -r %s -e 1,%s,%s,%s,%s"
 
         if position == Positions.W:
+            os.system("wmctrl -i -r %s -b toggle,maximized_vert" % window)
             os.system(cmdStr % (window, 0,0,w/2,h))
         if position == Positions.E:
+            os.system("wmctrl -i -r %s -b toggle,maximized_vert" % window)
             os.system(cmdStr % (window, w/2,0,w/2,h))
+        if position == Positions.F:
+            cmdStr = "wmctrl -i -r %s -b toggle,maximized_vert,maximized_horz"
+            os.system(cmdStr % window)
 
 class Tiler:
     def __init__(self):
